@@ -41,7 +41,7 @@ contract CreateSubscription is Script {
 }
 
 contract FundSubscription is Script, CodeConstant {
-    uint256 public constant FUND_AMOUNT = 100000000000 ether; // 3 link because of 18 decimals
+    uint256 public constant FUND_AMOUNT = 3 ether; // 3 link because of 18 decimals
 
     function fundSubscriptionUsingConfig() public {
         HelperConfig helperConfig = new HelperConfig();
@@ -65,7 +65,7 @@ contract FundSubscription is Script, CodeConstant {
             vm.startBroadcast(_account);
             VRFCoordinatorV2_5Mock(_vrfCoordinator).fundSubscription(
                 _subId,
-                FUND_AMOUNT
+                (FUND_AMOUNT * 100000)
             );
             vm.stopBroadcast();
         } else {
